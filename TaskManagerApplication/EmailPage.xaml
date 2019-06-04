@@ -1,0 +1,39 @@
+﻿<Page x:Class="TaskManagerApplication.EmailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TaskManagerApplication"
+      mc:Ignorable="d" 
+      d:DesignHeight="262.5" d:DesignWidth="400" 
+      Title="EmailPage">
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="166*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="1">Recipient</TextBlock>
+
+        <TextBox x:Name="recipientTextBox" Grid.Row="1" Grid.Column="1" Padding="0"></TextBox>
+        
+        <TextBlock Grid.Row="3">Header</TextBlock>
+
+        <TextBox x:Name="headerTextBox" Grid.Row="3" Grid.Column="3" Padding="0"></TextBox>
+
+        <TextBlock Grid.Row="5">Body</TextBlock>
+
+        <RichTextBox x:Name="bodyRichBox" Grid.Row="5" Grid.Column="5" Padding="0"></RichTextBox>
+
+    </Grid>
+</Page>
