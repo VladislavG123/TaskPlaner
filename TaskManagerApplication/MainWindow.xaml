@@ -29,18 +29,18 @@
             <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
 
-        <DatePicker x:Name="datePicker" materialDesign:HintAssist.Hint="Select date" Grid.Row="1"/>
+        <DatePicker x:Name="datePicker" materialDesign:HintAssist.Hint="Select start date" Grid.Row="1"/>
 
         <materialDesign:TimePicker x:Name="timePicker" Grid.Row="3"  />
         
         <Menu Grid.Row="5" HorizontalAlignment="Center">
-            <MenuItem Header="Select periodicity" Padding="0" Foreground="Gray" FontFamily="Roboto" FontSize="15">
-                <MenuItem Header="One time" Padding="5"></MenuItem>
+            <MenuItem x:Name="periodicityMenuItem" Header="Select periodicity" Padding="0" Foreground="Gray" FontFamily="Roboto" FontSize="15">
+                <MenuItem x:Name="oneTimeMenuItem" Click="OneTimeMenuItemClick" Header="One time" Padding="5"></MenuItem>
                 <MenuItem Header="Once a..." IsCheckable="False" Padding="5">
-                    <MenuItem Header="day" Padding="5"></MenuItem>
-                    <MenuItem Header="week" Padding="5"></MenuItem>
-                    <MenuItem Header="mounth" Padding="5"></MenuItem>
-                    <MenuItem Header="year" Padding="5"></MenuItem>
+                    <MenuItem x:Name="onceADayMenuItem" Click="OnceADayMenuItemClick" Header="day" Padding="5"></MenuItem>
+                    <MenuItem x:Name="onceAWeekMenuItem" Click="OnceAWeekMenuItemClick" Header="week" Padding="5"></MenuItem>
+                    <MenuItem x:Name="onceAMounthMenuItem" Click="OnceAMounthMenuItemClick" Header="mounth" Padding="5"></MenuItem>
+                    <MenuItem x:Name="onceAYearMenuItem" Click="OnceAYearMenuItemClick" Header="year" Padding="5"></MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -48,8 +48,8 @@
         <Menu Grid.Row="7" HorizontalAlignment="Center"  >
             <MenuItem x:Name="selectTypeMenuItem" Header="Select type" Padding="0" Foreground="Gray" FontFamily="Roboto" FontSize="15">
                 <MenuItem x:Name="emailMenuItem" Click="EmailMenuItemClick" Header="Email message" Padding="5"></MenuItem>
-                <MenuItem Header="Download file" Padding="5"></MenuItem>
-                <MenuItem Header="Move directory" Padding="5"></MenuItem>
+                <MenuItem x:Name="downloadMenuItem" Click="DownloadMenuItemClick" Header="Download file"  Padding="5"></MenuItem>
+                <MenuItem x:Name="moveDirectoryMenuItem" Click="MoveDirectoryMenuItemClick" Header="Move directory" Padding="5"></MenuItem>
             </MenuItem>
         </Menu>
 

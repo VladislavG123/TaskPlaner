@@ -23,3 +23,7 @@ C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerAp
 C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\BasePage.baml
 C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\EmailPage.g.cs
 C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\EmailPage.baml
+C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\MoveDirectoryPage.g.cs
+C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\MoveDirectoryPage.baml
+C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\DownloadPage.g.cs
+C:\Users\гороховв.CORP\source\repos\TaskManagerApplication\TaskManagerApplication\obj\Debug\DownloadPage.baml

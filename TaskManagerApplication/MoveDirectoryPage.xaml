@@ -1,0 +1,42 @@
+﻿<Page x:Class="TaskManagerApplication.MoveDirectoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TaskManagerApplication"
+      mc:Ignorable="d" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+      d:DesignHeight="262.5" d:DesignWidth="400"
+      Title="MoveDirectoryPage">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" FontSize="17">From</TextBlock>
+        <TextBox Padding="0" x:Name="fromTextBox" Grid.Row="1" Grid.Column="1"></TextBox>
+        <Button x:Name="fromFindDirectoryButton" Click="FromFindDirectoryButtonClick" Grid.Row="1" Grid.Column="2" Padding="0"  Content="{materialDesign:PackIcon Kind=DotsVertical}" Height="Auto"></Button>
+
+        <TextBlock Grid.Row="3" FontSize="17">To</TextBlock>
+        <TextBox Padding="0" x:Name="toTextBox" Grid.Row="3" Grid.Column="1" ></TextBox>
+        <Button Click="ToFindDirectoryButtonClick" x:Name="toFindDirectoryButton" Grid.Row="3" Grid.Column="2" Padding="0"  Content="{materialDesign:PackIcon Kind=DotsVertical}" Height="Auto" HorizontalAlignment="Left" Width="25"></Button>
+
+    </Grid>
+</Page>
