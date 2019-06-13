@@ -103,9 +103,12 @@
   <ItemGroup>
     <Compile Include="Models.Abstract\MyPage.cs" />
     <Compile Include="Models.Abstract\PageInformation.cs" />
+    <Compile Include="Models\ActionInfo.cs" />
     <Compile Include="Models\DownloadPageInformation.cs" />
     <Compile Include="Models\EmailPageInformation.cs" />
     <Compile Include="Models\MoveDirectoryPageInformation.cs" />
+    <Compile Include="Models\Pereodicity.cs" />
+    <Compile Include="Models\Type.cs" />
     <Compile Include="Models\TypeOfRepetitions.cs" />
     <Compile Include="MoveDirectoryPage.xaml.cs">
       <DependentUpon>MoveDirectoryPage.xaml</DependentUpon>
