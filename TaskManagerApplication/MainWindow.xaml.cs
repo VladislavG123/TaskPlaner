@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace TaskManagerApplication
     public partial class MainWindow : Window
     {
         private string password = "8W8_55Vlad";
+        private List<Timer> timers = new List<Timer>();
         private TypeOfRepetitions typeOfRepetitions;
 
         public MainWindow()
@@ -31,8 +33,13 @@ namespace TaskManagerApplication
             frame.Content = new BasePage();
         }
 
-        private void SendEmail(string toEmail, string header, string body)
+        private void SendEmail(object emailPageInformation)
         {
+            var info = emailPageInformation as EmailPageInformation;
+            string toEmail = info.Recipient;
+            string header = info.Header;
+            string body = info.Body;
+
             SmtpClient client = new SmtpClient
             {
                 Port = 587,
@@ -54,7 +61,9 @@ namespace TaskManagerApplication
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
+            WindowState = WindowState.Minimized;
+            ShowInTaskbar = false;
+            e.Cancel = true;
         }
 
         private void EmailMenuItemClick(object sender, RoutedEventArgs e)
@@ -64,8 +73,9 @@ namespace TaskManagerApplication
         }
 
 
-        private void DownloadFile(DownloadPageInformation information)
+        private void DownloadFile(object info)
         {
+            var information = info as DownloadPageInformation;
             using (WebClient wc = new WebClient())
             {
                 wc.DownloadFileAsync(
@@ -75,8 +85,9 @@ namespace TaskManagerApplication
             }
         }
 
-        private void MoveFile(MoveDirectoryPageInformation information)
+        private void MoveFile(object info)
         {
+            var information = info as MoveDirectoryPageInformation;
             try
             {
                 if (Directory.Exists(information.From))
@@ -103,30 +114,81 @@ namespace TaskManagerApplication
 
         private void NextButtonClick(object sender, RoutedEventArgs e)
         {
+            ActionInfo actionInfo = new ActionInfo();
+            DateTime dateTime;
+            try
+            {
+                var date = Convert.ToDateTime(datePicker.ToString());
+                var time = timePicker.SelectedTime;
+                dateTime = new DateTime(date.Year, date.Month, date.Day, time.Value.Hour, time.Value.Minute, 0);
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Select date and time!");
+                return;
+            }
+            actionInfo.StartDate = dateTime;
+
+            if (typeOfRepetitions == TypeOfRepetitions.None)
+            {
+                MessageBox.Show("Select periodicity!");
+                return;
+            }
+            actionInfo.Pereodicity = typeOfRepetitions;
+
+            int pulseHours = 0;
+
+            switch (typeOfRepetitions)
+            {
+                case TypeOfRepetitions.OneTime:
+                    pulseHours = 0;
+                    break;
+                case TypeOfRepetitions.OnceADay:
+                    pulseHours = 24;
+                    break;
+                case TypeOfRepetitions.OnceAWeek:
+                    pulseHours = 168;
+                    break;
+                case TypeOfRepetitions.OnceAMounth:
+                    pulseHours = 730;
+                    break;
+                case TypeOfRepetitions.OnceAYear:
+                    pulseHours = 8760;
+                    break;
+            }
+
             switch (selectTypeMenuItem.Header)
             {
                 case "Email message":
-
                     EmailPageInformation emailPageInformation = (frame.Content as MyPage).GetInformation() as EmailPageInformation;
 
-                    var date = Convert.ToDateTime(datePicker.ToString()).ToString("dd.MM.yyyy");
-                    var time = timePicker.SelectedTime.ToString();
-                    try
-                    {
-                        SendEmail(emailPageInformation.Recipient, emailPageInformation.Header + " " + date + " " + time, emailPageInformation.Body);
-                    }
-                    catch (Exception) { }
+                    actionInfo.Type = Models.Type.Email;
+
+                    timers.Add(new Timer(SendEmail, emailPageInformation, TimeSpan.FromHours(0), TimeSpan.FromHours(pulseHours)));
+
                     break;
 
                 case "Download file":
                     DownloadPageInformation downloadPageInformation = (frame.Content as MyPage).GetInformation() as DownloadPageInformation;
-                    DownloadFile(downloadPageInformation);
+
+                    actionInfo.Type = Models.Type.Download;
+
+                    timers.Add(new Timer(DownloadFile, downloadPageInformation, TimeSpan.FromHours(0), TimeSpan.FromHours(pulseHours)));
+
                     break;
 
                 case "Move directory":
                     MoveDirectoryPageInformation moveDirectoryPageInformation = (frame.Content as MyPage).GetInformation() as MoveDirectoryPageInformation;
-                    MoveFile(moveDirectoryPageInformation);
+                    
+                    actionInfo.Type = Models.Type.MoveDirectiory;
+
+                    timers.Add(new Timer(MoveFile, moveDirectoryPageInformation, TimeSpan.FromHours(0), TimeSpan.FromHours(pulseHours)));
+
                     break;
+                default:
+                    MessageBox.Show("Select type!");
+                    return;
             }
         }
 

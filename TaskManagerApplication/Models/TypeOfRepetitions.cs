@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManagerApplication.Models
 {
-    enum TypeOfRepetitions
+    public enum TypeOfRepetitions
     {
         None,
         OneTime,
